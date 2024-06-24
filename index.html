@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informatik Software Engineering</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<body>
+    <h1>Wie steht's gerade um deine Mannschaft?</h1>
+    <main>
+        <section>
+            <h3>Wähle deine Liga:</h3>
+            <label for="mainDropdown"></label>
+            <select id="mainDropdown" onchange="showSubDropdown()">
+                <option value="0">--</option>
+                <option value="bl1">1. Bundesliga</option>
+                <option value="bl2">2. Bundesliga</option>
+                <option value="bl3">3. Bundesliga</option>
+            </select>
+
+            <div id="subDropdown1B" style="display: none;">
+                <label for="teamBl1">
+                    <h3>Wähle deinen Verein:</h3>
+                </label>
+                <select id="teamBl1">
+                    <option value="199">1. FC Heidenheim</option>
+                    <option value="65">1. FC Köln</option>
+                    <option value="80">1. FC Union Berlin</option>
+                    <option value="6">Bayer 04 Leverkusen</option>
+                    <option value="7">Borussia Dortmund 09</option>
+                    <option value="87">Borussia M`Gladbach</option>
+                    <option value="95">FC Augsburg</option>
+                    <option value="40">FC Bayern München</option>
+                    <option value="81">FSV Mainz 05</option>
+                    <option value="1635">RB Leipzig</option>
+                    <option value="112">SC Freiburg</option>
+                    <option value="91">SG Eintracht Frankfurt</option>
+                    <option value="118">SV Darmstadt 98</option>
+                    <option value="134">SV Werder Bremen</option>
+                    <option value="175">TSG 1899 Hoffenheim</option>
+                    <option value="16">VFB Stuttgart</option>
+                    <option value="129">VFL Bochum</option>
+                    <option value="131">VFL Wolfsburg</option>
+                </select>
+            </div>
+            <div id="subDropdown2B" style="display: none;">
+                <label for="teamBl2">
+                    <h3>Wähle deinen Verein:</h3>
+                </label>
+                <select id="teamBl2">
+                    <option value="76">1. FC Kaiserslautern</option>
+                    <option value="78">1. FC Magdeburg</option>
+                    <option value="79">1. FC Nürnberg</option>
+                    <option value="74">Eintracht Braunschweig</option>
+                    <option value="102">FC Hansa Rostock</option>
+                    <option value="98">FC St. Pauli</option>
+                    <option value="9">FC Schalke 04</option>
+                    <option value="185">Fortuna Düsseldorf</option>
+                    <option value="100">Hamburger SV</option>
+                    <option value="55">Hannover 96</option>
+                    <option value="54">Hertha BSC</option>
+                    <option value="104">Holstein Kiel</option>
+                    <option value="105">Karlsruher SC</option>
+                    <option value="31">SC Paderborn 09</option>
+                    <option value="115">SpVgg Greuther Fürth</option>
+                    <option value="198">SV 07 Elversberg</option>
+                    <option value="174">SV Wehen Wiesbaden</option>
+                    <option value="36">VFL 1899 Osnabrück</option>
+                </select>
+            </div>
+            <div id="subDropdown3B" style="display: none;">
+                <label for="teamBl3">
+                    <h3>Wähle deinen Verein:</h3>
+                </label>
+                <select id="teamBl3" name="TeamBl3">
+                    <option value="564">SSV Ulm 1846</option>
+                    <option value="188">SC Preußen Münster</option>
+                    <option value="181">SSV Jahn Regensburg</option>
+                    <option value="177">SG Dynamo Dresden</option>
+                    <option value="417">1. FC Saarbrücken</option>
+                    <option value="66">Erzgebirge Aue</option>
+                    <option value="109">Rot-Weiss Essen</option>
+                    <option value="119">SV Sandhausen</option>
+                    <option value="116">SpVgg Unterhaching</option>
+                    <option value="171">FC Ingolstadt 04</option>
+                    <option value="1714">Borussia Dortmund II U23</option>
+                    <option value="114">SC Verl</option>
+                    <option value="2199">FC Viktoria Köln</option>
+                    <option value="83">Arminia Bielefeld</option>
+                    <option value="125">TSV 1860 München</option>
+                    <option value="553">SV Waldhof Mannheim</option>
+                    <option value="208">Hallescher FC</option>
+                    <option value="107">MSV Duisburg</option>
+                    <option value="532">VfB Lübeck</option>
+                    <option value="2397">SC Freiburg II U23</option>
+                </select>
+            </div>
+
+            <button type="button" onclick="ladeAPI()">Verein auswählen</button>
+
+            <button type="button" onclick="ladeDaten()">Tabellenplatz anzeigen</button>
+
+            <span>Der Tabellenplatz deiner Mannschaft:</span>
+            <span id="Tabellenplatz"></span>
+
+            <button type="button" onclick="ColorCar()">Lernträger färben</button>
+            
+        </section>
+        <section>
+            <h3>Legende:</h3>
+            <p><font color="#6ac40a" size="4">&#9724</font> Champions League</p>
+            <p><font color="#0e54cf" size="4">&#9724</font> UEFA Europa League</p> 
+            <p><font color="#0ab3cf" size="4">&#9724</font> Conference League Qualifikation</p> 
+            <p><font color="#e8c110" size="4">&#9724</font> Relegation Play-Offs</p> 
+            <p><font color="#c4340a" size="4">&#9724</font> Abstieg</p> 
+            <p><font color="#6300b3" size="4">&#9724</font> Aufstieg</p> 
+            <p><font color="#a909e6" size="4">&#9724</font> Aufstiegsspiel</p> 
+            <p><font color="#7a7a7a" size="4">&#9724</font> normaler Tabellenplatz</p> 
+        </section>
+    </main>
+</body>
+<script src="lerntraeger.js"></script>
+<script>
+    // gobal variables
+    const lerntraeger = new Lerntraeger("Student040");
+
+    let LigaID;
+    let Team;
+    let Result;
+    let ResultTeam1;
+    let ResultTeam2;
+    let TeamID1;
+    let TeamID2;
+    let FarbeR;
+    let FarbeG;
+    let FarbeB;
+
+    let Data;
+    let Position;
+
+    const Array = [];
+
+    // show SubDropDown only after choosing an value from MainDropDown
+    function showSubDropdown() {
+        const mainDropdown = document.getElementById("mainDropdown");
+        const subDropdown1B = document.getElementById("subDropdown1B"); // option 1. Bundesliga
+        const subDropdown2B = document.getElementById("subDropdown2B"); // option 2. Bundesliga
+        const subDropdown3B = document.getElementById("subDropdown3B"); // option 3. Bundesliga
+
+        if (mainDropdown.value === "bl1") {
+            subDropdown1B.style.display = "block";
+            subDropdown2B.style.display = "none";
+            subDropdown3B.style.display = "none";
+        } else if (mainDropdown.value === "bl2") {
+            subDropdown2B.style.display = "block";
+            subDropdown1B.style.display = "none";
+            subDropdown3B.style.display = "none";
+        } else if (mainDropdown.value === "bl3") {
+            subDropdown3B.style.display = "block";
+            subDropdown1B.style.display = "none";
+            subDropdown2B.style.display = "none";
+        } else if (mainDropdown.value === "0") {
+            subDropdown2B.style.display = "none";
+            subDropdown1B.style.display = "none";
+            subDropdown3B.style.display = "none";
+        }
+    }
+    
+    // get current season for Bundesliga API
+    const aktuellesJahr = new Date().getFullYear();
+    const aktuellerMonat = new Date().getMonth();
+    const aktuelleSaisonString = pruefeaktuelleSaison(aktuellerMonat).toString();
+
+    // check if new season already started
+    function pruefeaktuelleSaison(aktuellerMonat) {
+        if (aktuellerMonat < 7) {
+            aktuelleSaison = aktuellesJahr - 1;
+        } else {
+            aktuelleSaison = aktuellesJahr;
+        }
+        return aktuelleSaison;
+    }
+
+    // read database and write LigaID
+    function ladeAPI() {
+
+    const MainDropDown = document.getElementById("mainDropdown").value;
+            // get the ID and the name of the team
+            if (MainDropDown === "bl1") {
+    
+                Team = document.getElementById("teamBl1").value;
+    
+                } else if (MainDropDown === "bl2") {
+    
+                Team = document.getElementById("teamBl2").value;
+                } else if (MainDropDown === "bl3") {
+                
+                Team = document.getElementById("teamBl3").value;
+                }
+                
+
+        // local variables
+        const Saison = aktuelleSaisonString;
+        const Liga = document.getElementById("mainDropdown").value;
+        const URL_Liga = 'https://api.openligadb.de/getbltable/' + Liga + '/' + Saison;
+
+        // get the league table from database
+        fetch(URL_Liga)
+            .then(response => response.json())
+            .then(data => {
+                Data = data;
+                console.log(Data);
+        console.log(Team)
+            });
+    }
+        
+    function ladeDaten() {
+           
+        Array[0] = Data[0].teamInfoId;
+        Array[1] = Data[1].teamInfoId;
+        Array[2] = Data[2].teamInfoId;
+        Array[3] = Data[3].teamInfoId;
+        Array[4] = Data[4].teamInfoId;
+        Array[5] = Data[5].teamInfoId;
+        Array[6] = Data[6].teamInfoId;
+        Array[7] = Data[7].teamInfoId;
+        Array[8] = Data[8].teamInfoId;
+        Array[9] = Data[9].teamInfoId;
+        Array[10] = Data[10].teamInfoId;
+        Array[11] = Data[11].teamInfoId;
+        Array[12] = Data[12].teamInfoId;
+        Array[13] = Data[13].teamInfoId;
+        Array[14] = Data[14].teamInfoId;
+        Array[15] = Data[15].teamInfoId;
+        Array[16] = Data[16].teamInfoId;
+        Array[17] = Data[17].teamInfoId;
+
+        console.log(Array);
+        
+        const strTeam = parseInt(Team)
+        
+        Position = Array.indexOf(strTeam);
+
+        console.log(Position + 1);
+        output = Position + 1;
+        console.log(output);
+
+        Tabellenplatz.innerHTML = output;
+        
+    }
+
+    function ColorCar() {
+
+        const MainDropDown = document.getElementById("mainDropdown").value;
+
+            if (Position <= 4){
+                inputColorValueR = 106;
+                inputColorValueG = 196;
+                inputColorValueB = 10;
+            }
+            else if (5 <= Position <= 6) {
+                inputColorValueR = 1;
+                inputColorValueG = 1;
+                inputColorValueB = 10;
+            }
+            else if (Position == 7) {
+                inputColorValueR = 200;
+                inputColorValueG = 200;
+                inputColorValueB = 10;
+            }
+        lerntraeger.setColor(inputColorValueR, inputColorValueG, inputColorValueB);
+        console.log(inputColorValueR);
+    }
+    
+    </script>
+
+</html>
